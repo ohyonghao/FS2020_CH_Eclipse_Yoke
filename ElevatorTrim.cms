@@ -1,0 +1,33 @@
+// Licensed under the GNU General Public License v3.0
+// See the LICENSE file at the root of this repository for the full
+// license and details.
+//
+// CMS Script File
+//
+//     Game Title: FS 2020
+//     Written By: David Post
+//           Date: 2020-09-03
+//
+script
+%define step 10
+  SEQUENCE
+    WAIT( JS1.B15 ); // Nose down
+    IF( [ CMS.A1 > step ] ) THEN
+      CMS.A1 = CMS.A1 - step;
+    ELSE
+      CMS.A1 = 0;
+    ENDIF
+  ENDSEQUENCE
+  SEQUENCE
+    WAIT( JS1.B16 ); // Nose up
+    IF( [ CMS.A1 < (255 - step) ] ) THEN
+      CMS.A1 = CMS.A1 + step;
+    ELSE
+      CMS.A1 = 255;
+    ENDIF
+  ENDSEQUENCE
+  SEQUENCE
+    WAIT( JS1.B17 ); // Reset
+    CMS.A1 = 128;
+  ENDSEQUENCE
+endScript
